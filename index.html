@@ -1,15 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
+    <title>Michelle Jiang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: white;
+            overflow: hidden;
+        }
+
+        /* Scale all values from a 1440px design width using vw units (px / 14.4) */
+        .page {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Logo star image: left 17px, top 19px, 72x53px */
+        .logo-img {
+            position: absolute;
+            left: 1.18vw;
+            top: 1.32vw;
+            width: 5vw;
+            height: 3.68vw;
+            object-fit: contain;
+        }
+
+        /* "michelle jiang": left 83px, top 36px, 36px font */
+        .site-name {
+            position: absolute;
+            left: 5.76vw;
+            top: 2.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        /* Nav links: top 36px, 36px font */
+        nav {
+            position: absolute;
+            right: 1.32vw;
+            top: 2.5vw;
+            display: flex;
+            gap: 2.5vw;
+        }
+
+        nav a {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* "Welcome!": left 90px, top 310px, 256px font */
+        .welcome {
+            position: absolute;
+            left: 6.25vw;
+            top: 19.5vw;
+            font-family: 'Ingrid Darling', sans-serif;
+            font-size: 17.78vw;
+            color: black;
+            line-height: 1;
+        }
+
+        /* "this is michelle's portfolio.": left 140px, top 586px, 64px font */
+        .tagline {
+            position: absolute;
+            left: 9.72vw;
+            top: 36vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 3vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        /* Characters image: bottom-right, moved up to fit within viewport */
+        .characters {
+            position: absolute;
+            left: 76.74vw;
+            top: 43vw;
+            width: 20.55vw;
+            height: 13.52vw;
+            object-fit: contain;
+            transform: rotate(9.65deg);
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Visible content goes here -->
-    <h1>My First Heading</h1>
-    <p>My first paragraph.</p>
-
+    <div class="page">
+        <img class="logo-img" src="https://www.figma.com/api/mcp/asset/b4157d5f-6443-4d52-a581-0af12d80ad2c" alt="logo">
+        <a class="site-name" href="#">michelle jiang</a>
+        <nav>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="experience.html">experience</a>
+        </nav>
+        <p class="welcome">Welcome!</p>
+        <p class="tagline">this is michelle&#8217;s portfolio.</p>
+        <img class="characters" src="https://www.figma.com/api/mcp/asset/5aee02d1-0fac-4614-9560-5fb052fec30f" alt="characters">
+    </div>
 </body>
 </html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience — Michelle Jiang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+        body {
+            background: white;
+            overflow-x: hidden;
+        }
+
+        /* ── Nav ── */
+        .logo-img {
+            position: absolute;
+            left: 1.18vw;
+            top: 1.32vw;
+            width: 5vw;
+            height: 3.68vw;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        .site-name {
+            position: absolute;
+            left: 5.76vw;
+            top: 2.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            white-space: nowrap;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        nav {
+            position: absolute;
+            right: 1.32vw;
+            top: 2.5vw;
+            display: flex;
+            gap: 2.5vw;
+            z-index: 10;
+        }
+
+        nav a {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover { opacity: 0.6; }
+
+        nav a.active {
+            text-decoration: underline;
+            text-decoration-color: #480e78;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 6px;
+        }
+
+        /* ── Page heading ── */
+        .page-heading {
+            position: absolute;
+            left: 5.76vw;
+            top: 11.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 4vw;
+            color: black;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        /* ── Experience area ── */
+        .experience-area {
+            position: relative;
+            padding-top: 17vw; /* clear nav + heading */
+            padding-bottom: 8vw;
+        }
+
+        /* ── Vertical squiggle spine ──
+           Original image: ~66.74vw wide × 18.33vw tall (horizontal squiggle)
+           Rotated 90deg to become: 18.33vw wide × 66.74vw tall (vertical spine)
+           Math: DOM left = -(66.74/2 - 18.33/2)vw, DOM top = (66.74/2 - 18.33/2)vw */
+        .timeline-spine {
+            position: absolute;
+            left: calc(50% - 9.165vw);
+            top: 14vw;
+            width: 18.33vw;
+            height: 66.74vw;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .timeline-spine img {
+            position: absolute;
+            width: 66.74vw;
+            height: 18.33vw;
+            max-width: none;
+            transform: rotate(90deg);
+            left: -24.205vw;
+            top: 24.205vw;
+        }
+
+        /* ── Fluffy character: left 27px, top 401px ── */
+        .char-fluffy {
+            position: absolute;
+            left: 1.88vw;
+            top: 27.85vw;
+            width: 8.16vw;
+            height: 8.47vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .char-fluffy-inner { transform: rotate(9.65deg); flex-shrink: 0; }
+
+        .char-fluffy-clip {
+            width: 7.02vw;
+            height: 7.4vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-fluffy-clip img {
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%;
+            width: 191.72%;
+            max-width: none;
+        }
+
+        /* ── Star character: left 1279px, top 711px ── */
+        .char-star {
+            position: absolute;
+            left: 88.82vw;
+            top: 49.38vw;
+            width: 8.16vw;
+            height: 8.47vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .char-star-inner { transform: rotate(9.65deg); flex-shrink: 0; }
+
+        .char-star-clip {
+            width: 7.02vw;
+            height: 7.4vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-star-clip img {
+            position: absolute;
+            left: -95.32%; top: 8.04%;
+            height: 100%;
+            width: 191.72%;
+            max-width: none;
+        }
+
+        /* ════════════════════════════════════════════
+           TIMELINE
+           To add a new entry:
+             1. Copy a .timeline-entry block below
+             2. Alternate class="timeline-entry left" and "right"
+             3. Fill in role, org, date, and bullet points
+           ════════════════════════════════════════════ */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 3vw;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Each entry: card sits on one side, connector extends toward center spine */
+        .timeline-entry {
+            position: relative;
+            width: 27.08vw;   /* ~390px card width */
+            min-height: 21.88vw; /* ~315px */
+        }
+
+        .timeline-entry.left {
+            align-self: flex-start;
+            margin-left: 11.81vw; /* 170px from left edge */
+        }
+
+        .timeline-entry.right {
+            align-self: flex-end;
+            margin-right: 6.53vw; /* ~94px from right edge */
+        }
+
+        /* Connector lines from card to center spine */
+        .timeline-entry.left::after {
+            content: '';
+            position: absolute;
+            top: 4.51vw;         /* 20.63% × 315px ≈ 65px */
+            right: -16vw;
+            width: 16vw;
+            height: 1px;
+            background: #aaa;
+            z-index: 0;
+        }
+
+        .timeline-entry.right::before {
+            content: '';
+            position: absolute;
+            top: 4.24vw;         /* 19.37% × 315px ≈ 61px */
+            left: -16vw;
+            width: 16vw;
+            height: 1px;
+            background: #aaa;
+            z-index: 0;
+        }
+
+        /* Card box */
+        .entry-card {
+            background: #e8e4eb;
+            border-radius: 1.6vw; /* 23px */
+            padding: 1.67vw 1.39vw 1.67vw 1.39vw;
+            height: 100%;
+            min-height: 21.88vw;
+            position: relative;
+            z-index: 2;
+        }
+
+        .entry-role {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .entry-org {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .entry-date {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            color: black;
+            white-space: nowrap;
+            margin-bottom: 1.5vw;
+        }
+
+        .entry-bullets {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            color: black;
+            margin-left: 2vw;
+        }
+
+        .entry-bullets li {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <img class="logo-img" src="https://www.figma.com/api/mcp/asset/5319a0d0-a9fc-4bdb-b882-6ed5122a3a81" alt="logo">
+    <a class="site-name" href="index.html">michelle jiang</a>
+    <nav>
+        <a href="about.html">about</a>
+        <a href="projects.html">projects</a>
+        <a href="experience.html" class="active">experience</a>
+    </nav>
+
+    <p class="page-heading">experience</p>
+
+    <div class="experience-area">
+
+        <!-- Decorative vertical squiggle spine -->
+        <div class="timeline-spine">
+            <img src="https://www.figma.com/api/mcp/asset/ba7b386d-a054-46bb-8e72-a29f09581fd2" alt="">
+        </div>
+
+        <!-- Fluffy character -->
+        <div class="char-fluffy">
+            <div class="char-fluffy-inner">
+                <div class="char-fluffy-clip">
+                    <img src="https://www.figma.com/api/mcp/asset/af10c3df-dccc-4a78-baf9-dfcc0164e394" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Star character -->
+        <div class="char-star">
+            <div class="char-star-inner">
+                <div class="char-star-clip">
+                    <img src="https://www.figma.com/api/mcp/asset/06cf851b-2a6e-4f5f-b918-2879732b8eeb" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================
+             TIMELINE ENTRIES
+             To add a new entry:
+               • Copy a .timeline-entry block
+               • Toggle class between "left" and "right"
+               • Update role, org, date, and bullet points
+             ===================================================== -->
+        <div class="timeline">
+
+            <div class="timeline-entry left">
+                <div class="entry-card">
+                    <p class="entry-role">Enterprise Technology Intern</p>
+                    <p class="entry-org">@ State Farm</p>
+                    <p class="entry-date">May 2026 - Aug 2026</p>
+                    <ul class="entry-bullets">
+                        <li>data engineering and aggregation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-entry right">
+                <div class="entry-card">
+                    <p class="entry-role">Effective Coding with AI TA</p>
+                    <p class="entry-org">@ CMU School of Computer Science</p>
+                    <p class="entry-date">January 2026 - present</p>
+                    <ul class="entry-bullets">
+                        <li>ta duties ts</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

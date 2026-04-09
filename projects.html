@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Michelle Jiang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+        body {
+            background: white;
+            overflow-x: hidden;
+        }
+
+        /* All values scaled from 1440px design width (px / 14.4 = vw) */
+
+        /* ── Nav ── */
+        .logo-img {
+            position: absolute;
+            left: 1.18vw;
+            top: 1.32vw;
+            width: 5vw;
+            height: 3.68vw;
+            object-fit: contain;
+            z-index: 10;
+        }
+
+        .site-name {
+            position: absolute;
+            left: 5.76vw;
+            top: 2.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            white-space: nowrap;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        nav {
+            position: absolute;
+            right: 1.32vw;
+            top: 2.5vw;
+            display: flex;
+            gap: 2.5vw;
+            z-index: 10;
+        }
+
+        nav a {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* Active underline for current page */
+        nav a.active {
+            text-decoration: underline;
+            text-decoration-color: #480e78;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 6px;
+        }
+
+        /* "project gallery" heading — matches "a little about me" on about page */
+        .page-heading {
+            position: absolute;
+            left: 5.76vw;
+            top: 11.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 4vw;
+            color: black;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        /* ── Page body ── */
+        /* Contains squiggle, characters, and panel — starts at top of page */
+        .projects-area {
+            position: relative;
+            padding-top: 19.86vw; /* panel top: 286px */
+            padding-bottom: 6vw;
+        }
+
+        /* Squiggle decoration: left 732px, top 97px, 749x206px */
+        .squiggle {
+            position: absolute;
+            left: 50.83vw;
+            top: 6.74vw;
+            width: 52.01vw;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        /* ── Rounded panel: left 69px, width 1301px, radius 79px ── */
+        .projects-panel {
+            margin: 0 4.79vw;
+            background: #e8e4eb;
+            border-radius: 5.49vw;
+            padding: 5.69vw 7.92vw;
+            position: relative; /* so characters inside can be absolute */
+        }
+
+        /* Fluffy character: left 27px (page) → sticks out left of panel (panel left: 69px)
+           top 401px (page) → 401 - 286 = 115px below panel top = 7.99vw into panel area */
+        .char-fluffy {
+            position: absolute;
+            left: -4.31vw; /* 27px - 69px = -42px relative to panel → -2.92vw */
+            top: -1.87vw;  /* 401px - 286px = 115px, but panel padding-top is 5.69vw; so char is above content: (401-286)/14.4 = 7.99vw from panel top, minus panel padding offset */
+            width: 8.16vw;
+            height: 8.47vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .char-fluffy-inner {
+            transform: rotate(9.65deg);
+            flex-shrink: 0;
+        }
+
+        .char-fluffy-clip {
+            width: 7.02vw;
+            height: 7.4vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-fluffy-clip img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 191.72%;
+            max-width: none;
+        }
+
+        /* Star character: left 1270px → relative to panel (left 69px) = 1201px = 83.4vw
+           top 710px → relative to panel top (286px) = 424px = 29.44vw */
+        .char-star {
+            position: absolute;
+            left: 83.4vw;
+            top: 29.44vw;
+            width: 8.16vw;
+            height: 8.47vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .char-star-inner {
+            transform: rotate(9.65deg);
+            flex-shrink: 0;
+        }
+
+        .char-star-clip {
+            width: 7.02vw;
+            height: 7.4vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-star-clip img {
+            position: absolute;
+            left: -95.32%;
+            top: 8.04%;
+            height: 100%;
+            width: 191.72%;
+            max-width: none;
+        }
+
+        /* ── Projects grid ── */
+        /* To add a new project: copy one .project-card block inside .projects-grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4vw 11.53vw;
+        }
+
+        .project-card {
+            background: #d9d9d9;
+            border-radius: 0.7vw;
+            aspect-ratio: 445 / 230;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <img class="logo-img" src="https://www.figma.com/api/mcp/asset/d2e5b1fd-20aa-4f1d-bb39-bda5220f5289" alt="logo">
+    <a class="site-name" href="index.html">michelle jiang</a>
+    <nav>
+        <a href="about.html">about</a>
+        <a href="projects.html" class="active">projects</a>
+        <a href="experience.html">experience</a>
+    </nav>
+
+    <p class="page-heading">project gallery</p>
+
+    <div class="projects-area">
+
+        <!-- Squiggle decoration (top right) -->
+        <img class="squiggle" src="https://www.figma.com/api/mcp/asset/cc306f70-ca9f-4911-9b7d-3280248d6377" alt="">
+
+        <!-- Main panel -->
+        <div class="projects-panel">
+
+            <!-- Fluffy character (left edge) -->
+            <div class="char-fluffy">
+                <div class="char-fluffy-inner">
+                    <div class="char-fluffy-clip">
+                        <img src="https://www.figma.com/api/mcp/asset/ef338219-5d2d-4db0-90f4-9c698e7d7a63" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Star character (right edge) -->
+            <div class="char-star">
+                <div class="char-star-inner">
+                    <div class="char-star-clip">
+                        <img src="https://www.figma.com/api/mcp/asset/54dcccb6-d813-4726-8dd8-51ce308a2c49" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- =============================================
+                 PROJECT GRID
+                 To add a new project, copy a .project-card
+                 block below and paste it inside this div.
+                 ============================================= -->
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <!-- Project content goes here -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

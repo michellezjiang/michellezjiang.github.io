@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Michelle Jiang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: white;
+            overflow-x: hidden;
+        }
+
+        /* All values scaled from 1440px design width (px / 14.4 = vw) */
+        .page {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            padding-bottom: 4vw;
+        }
+
+        /* ── Nav ── */
+        .logo-img {
+            position: absolute;
+            left: 1.18vw;
+            top: 1.32vw;
+            width: 5vw;
+            height: 3.68vw;
+            object-fit: contain;
+        }
+
+        .site-name {
+            position: absolute;
+            left: 5.76vw;
+            top: 2.5vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        nav {
+            position: absolute;
+            right: 1.32vw;
+            top: 2.5vw;
+            display: flex;
+            gap: 2.5vw;
+        }
+
+        nav a {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 2.15vw;
+            color: black;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* ── About section ── */
+
+        /* "a little about me": left 83px, top 219px, 64px */
+        .about-heading {
+            position: absolute;
+            left: 5.76vw;
+            top: 13.8vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 4vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        /* Bio paragraph: left 83px, top 326px, 32px, line-height 38px, width 581px */
+        .bio-text {
+            position: absolute;
+            left: 5.76vw;
+            top: 20vw;
+            width: 42vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.7vw;
+            line-height: 2.64vw;
+            color: black;
+        }
+
+        /* "+ more!": left 83px, top 594px, 24px, underlined */
+        .more-link {
+            position: absolute;
+            left: 5.76vw;
+            top: 35vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            color: black;
+            text-decoration: underline;
+            white-space: nowrap;
+        }
+
+        .more-link:hover {
+            opacity: 0.6;
+        }
+
+        /* Profile photo circle: left 862px, top 261px, 394x393px */
+        .profile-photo-wrap {
+            position: absolute;
+            left: 59.86vw;
+            top: 16vw;
+            width: 27.36vw;
+            height: 27.29vw;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Fluffy character: left 817px, top 187px, rotated -17.23deg
+           Container: 179.966x186.023px; inner clip 141.647x150.839px; img width 193.82% */
+        .char-container {
+            position: absolute;
+            left: 56.74vw;
+            top: 11vw;
+            width: 12.5vw;
+            height: 12.92vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .char-rotated {
+            transform: rotate(-17.23deg);
+            flex-shrink: 0;
+        }
+
+        .char-clip {
+            width: 9.83vw;
+            height: 10.47vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-clip img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 193.82%;
+            max-width: none;
+        }
+
+        /* ── Contact section ── */
+
+        /* "contact me": left 83px, top 680px, 64px */
+        .contact-heading {
+            position: absolute;
+            left: 5.76vw;
+            top: 41vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 4vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        /* Buttons: top 820px, height 78px, width 208px, radius 17px */
+        .contact-btn {
+            position: absolute;
+            top: 48vw;
+            width: 14.44vw;
+            height: 5.42vw;
+            background: #e8e4eb;
+            border-radius: 1.18vw;
+            display: flex;
+            align-items: center;
+            gap: 0.7vw;
+            padding: 0 1.2vw;
+            text-decoration: none;
+            color: black;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .contact-btn:hover {
+            background: #480e78;
+            color: white;
+        }
+
+        .contact-btn:hover .btn-icon {
+            filter: invert(1) brightness(2);
+        }
+
+        .btn-icon {
+            width: 3.33vw;
+            height: 3.33vw;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .btn-linkedin .btn-icon {
+            filter: brightness(0);
+        }
+
+        .btn-linkedin:hover .btn-icon {
+            filter: brightness(0) invert(1);
+        }
+
+        .btn-label-wrap {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+        }
+
+        .btn-label {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
+            white-space: nowrap;
+        }
+
+        .btn-sub {
+            font-family: 'Hubballi', sans-serif;
+            font-size: 0.97vw;
+            white-space: nowrap;
+        }
+
+        /* Button positions: left 167, 466, 765, 1064 */
+        .btn-email    { left: 11.6vw; }
+        .btn-linkedin { left: 32.36vw; }
+        .btn-github   { left: 53.13vw; }
+        .btn-resume   { left: 73.89vw; }
+
+        /* ── More modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-panel {
+            background: white;
+            border-radius: 2vw;
+            width: min(62vw, 92vw);
+            max-height: 82vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2vh 2vw 1vh 2vw;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-family: 'Ingrid Darling', sans-serif;
+            font-size: 3.5vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        .modal-close {
+            width: 1.6vw;
+            height: 1.6vw;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .modal-close img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-body {
+            display: flex;
+            gap: 2vw;
+            padding: 0 2vw 2vh 2vw;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .modal-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2vh;
+            flex-shrink: 0;
+            width: 18vw;
+            overflow-y: auto;
+        }
+
+        .modal-img-slot {
+            background: #d9d9d9;
+            border-radius: 0.5vw;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            flex-shrink: 0;
+        }
+
+        .modal-text {
+            flex: 1;
+            overflow-y: auto;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.7vw;
+            line-height: 1.9vw;
+            color: black;
+        }
+
+        .modal-text p + p {
+            margin-top: 1.2vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- Nav -->
+        <img class="logo-img" src="https://www.figma.com/api/mcp/asset/de86b5b0-2284-406b-bf8a-691cafd9472a" alt="logo">
+        <a class="site-name" href="index.html">michelle jiang</a>
+        <nav>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="experience.html">experience</a>
+        </nav>
+
+        <!-- About -->
+        <p class="about-heading">a little about me</p>
+        <p class="bio-text">Hi! My name is Michelle and I am currently a sophomore at Carnegie Mellon University studying Statistics &amp; Machine Learning, with an additional major in Artificial Intelligence. My primary interests are in machine learning, physical AI, and AI safety.</p>
+        <a class="more-link" href="#" id="more-link">+ more!</a>
+
+        <!-- Profile photo -->
+        <div class="profile-photo-wrap">
+            <img src="https://www.figma.com/api/mcp/asset/a6d94afb-20f5-43ef-8ce5-e772db238897" alt="Michelle Jiang">
+        </div>
+
+        <!-- Fluffy character overlapping photo -->
+        <div class="char-container">
+            <div class="char-rotated">
+                <div class="char-clip">
+                    <img src="https://www.figma.com/api/mcp/asset/3340d5e5-f497-4ed3-b30b-07afb89b56bd" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <p class="contact-heading">contact me</p>
+
+        <a class="contact-btn btn-email" href="mailto:mzj@andrew.cmu.edu">
+            <img class="btn-icon" src="https://www.figma.com/api/mcp/asset/21e78f2f-e6f6-45f7-b889-ed494e07c4b1" alt="">
+            <div class="btn-label-wrap">
+                <span class="btn-label">email</span>
+                <span class="btn-sub">mzj@andrew.cmu.edu</span>
+            </div>
+        </a>
+
+        <a class="contact-btn btn-linkedin" href="https://www.linkedin.com/in/michelle-jiang-5ab5a0302/" target="_blank" rel="noopener">
+            <img class="btn-icon" src="https://www.figma.com/api/mcp/asset/8dccdb02-5c86-4076-bde8-dcde34e5a830" alt="">
+            <div class="btn-label-wrap">
+                <span class="btn-label">linkedin</span>
+            </div>
+        </a>
+
+        <a class="contact-btn btn-github" href="https://github.com/michellezjiang" target="_blank" rel="noopener">
+            <img class="btn-icon" src="https://www.figma.com/api/mcp/asset/1039707d-79f6-4e9b-af54-2cb994418d67" alt="">
+            <div class="btn-label-wrap">
+                <span class="btn-label">github</span>
+            </div>
+        </a>
+
+        <a class="contact-btn btn-resume" href="#" target="_blank" rel="noopener">
+            <img class="btn-icon" src="https://www.figma.com/api/mcp/asset/21b391f7-13b2-47d4-834d-1abe68d7845f" alt="">
+            <div class="btn-label-wrap">
+                <span class="btn-label">resume</span>
+                <span class="btn-sub">pdf</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- More modal -->
+    <div class="modal-overlay" id="more-modal">
+        <div class="modal-panel">
+
+            <div class="modal-header">
+                <p class="modal-title">a little more...</p>
+                <button class="modal-close" id="modal-close" aria-label="Close">
+                    <img src="https://www.figma.com/api/mcp/asset/3246ffca-ba71-4b48-a99b-ab86914c9fd3" alt="close">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Image slots (blank for now) -->
+                <div class="modal-images">
+                    <div class="modal-img-slot"></div>
+                    <div class="modal-img-slot"></div>
+                    <div class="modal-img-slot"></div>
+                </div>
+
+                <!-- Text -->
+                <div class="modal-text">
+                    <p>When I need a break from school, I enjoy exploring my various hobbies with my friends! Recently, I&#8217;ve been really into trying new restaurants around my school. If you ever need food recommendations in the Pittsburgh area, check out my Yelp here.</p>
+                    <p>In addition to food, I also enjoy playing tennis when the weather is nice. I actually played competitively from elementary school to high school! I have also been trying to get back into reading, which you can see on my Goodreads!</p>
+                    <p>My minor hobbies, which I dabble in from time to time include: fashion/design, UI/UX, teaching, traveling, long walks, Severance &amp; cafe hopping.</p>
+                    <p>Overall, I just really enjoy rating things and giving my unsolicited opinions on the internet (as you can probably tell &#128513;)</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const modal   = document.getElementById('more-modal');
+        const openBtn = document.getElementById('more-link');
+        const closeBtn = document.getElementById('modal-close');
+
+        openBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
