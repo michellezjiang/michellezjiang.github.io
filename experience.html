@@ -273,13 +273,163 @@
         .entry-bullets li {
             white-space: nowrap;
         }
+
+        /* On desktop nav-row children are absolutely positioned — wrapper is invisible */
+        .nav-row {
+            display: contents;
+        }
+
+        /* ── Tablet (768px – 1024px) ── */
+        @media (max-width: 1024px) {
+            .logo-img {
+                width: 40px;
+                height: 30px;
+                left: 16px;
+                top: 14px;
+            }
+
+            .site-name {
+                left: 64px;
+                top: 18px;
+                font-size: 20px;
+            }
+
+            nav {
+                right: 16px;
+                top: 18px;
+                gap: 20px;
+            }
+
+            nav a { font-size: 20px; }
+
+            .page-heading {
+                font-size: 4vw;
+                top: 12vw;
+            }
+
+            .entry-role,
+            .entry-org,
+            .entry-date,
+            .entry-bullets {
+                font-size: 1.8vw;
+            }
+        }
+
+        /* ── Mobile (<768px) ── */
+        @media (max-width: 767px) {
+            body {
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Nav */
+            .nav-row {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 20px 0;
+                margin-bottom: 8px;
+            }
+
+            .logo-img {
+                position: static;
+                width: 36px;
+                height: 26px;
+                flex-shrink: 0;
+                z-index: auto;
+            }
+
+            .site-name {
+                position: static;
+                font-size: 18px;
+                z-index: auto;
+            }
+
+            nav {
+                position: static;
+                gap: 20px;
+                padding: 0 20px;
+                margin-bottom: 8px;
+                z-index: auto;
+            }
+
+            nav a { font-size: 16px; }
+
+            /* Page heading */
+            .page-heading {
+                position: static;
+                font-size: 28px;
+                white-space: normal;
+                padding: 0 20px;
+                margin-bottom: 0;
+                z-index: auto;
+            }
+
+            /* Experience area */
+            .experience-area {
+                padding-top: 16px;
+                padding-bottom: 40px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Hide decorative spine and characters */
+            .timeline-spine,
+            .char-fluffy,
+            .char-star {
+                display: none;
+            }
+
+            /* Single-column timeline: all entries full-width, left-aligned */
+            .timeline {
+                gap: 16px;
+            }
+
+            .timeline-entry {
+                width: 100%;
+                min-height: auto;
+                align-self: stretch !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            /* Remove connector lines */
+            .timeline-entry.left::after,
+            .timeline-entry.right::before {
+                display: none;
+            }
+
+            /* Cards */
+            .entry-card {
+                padding: 16px;
+                border-radius: 14px;
+                min-height: auto;
+            }
+
+            .entry-role,
+            .entry-org,
+            .entry-date,
+            .entry-bullets {
+                font-size: 15px;
+                white-space: normal;
+            }
+
+            .entry-date { margin-bottom: 10px; }
+
+            .entry-bullets {
+                margin-left: 18px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <!-- Nav -->
-    <img class="logo-img" src="assets/logo.png" alt="logo">
-    <a class="site-name" href="index.html">michelle jiang</a>
+    <div class="nav-row">
+        <a href="index.html"><img class="logo-img" src="assets/logo.png" alt="logo"></a>
+        <a class="site-name" href="index.html">michelle jiang</a>
+    </div>
     <nav>
         <a href="about.html">about</a>
         <a href="projects.html">projects</a>

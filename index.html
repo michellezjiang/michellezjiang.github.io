@@ -32,6 +32,11 @@
             height: 100vh;
         }
 
+        /* On desktop the nav-row children are absolute, so this wrapper is invisible */
+        .nav-row {
+            display: contents;
+        }
+
         /* Logo star image: left 17px, top 19px, 72x53px */
         .logo-img {
             position: absolute;
@@ -107,12 +112,129 @@
             object-fit: contain;
             transform: rotate(9.65deg);
         }
+
+        /* ── Tablet (768px – 1024px) ── */
+        @media (max-width: 1024px) {
+            .logo-img {
+                width: 40px;
+                height: 30px;
+                left: 16px;
+                top: 14px;
+            }
+
+            .site-name {
+                left: 64px;
+                top: 18px;
+                font-size: 20px;
+            }
+
+            nav {
+                right: 16px;
+                top: 18px;
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 20px;
+            }
+
+            .welcome {
+                left: 5vw;
+                top: 18vw;
+                font-size: 18vw;
+            }
+
+            .tagline {
+                left: 7vw;
+                top: 36vw;
+                font-size: 3.5vw;
+            }
+
+            .characters {
+                left: 68vw;
+                top: 44vw;
+                width: 28vw;
+                height: 18vw;
+            }
+        }
+
+        /* ── Mobile (<768px) ── */
+        @media (max-width: 767px) {
+            body {
+                overflow: auto;
+                height: auto;
+            }
+
+            .page {
+                position: static;
+                height: auto;
+                min-height: 100vh;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                padding: 14px 20px 40px;
+            }
+
+            /* nav-row: logo + site name side by side */
+            .nav-row {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .logo-img {
+                position: static;
+                width: 36px;
+                height: 26px;
+                flex-shrink: 0;
+            }
+
+            .site-name {
+                position: static;
+                font-size: 18px;
+            }
+
+            /* Nav links row below logo */
+            nav {
+                position: static;
+                gap: 20px;
+                justify-content: flex-start;
+                margin-bottom: 4px;
+            }
+
+            nav a {
+                font-size: 16px;
+            }
+
+            /* Main content stacked */
+            .welcome {
+                position: static;
+                font-size: 21vw;
+                line-height: 1;
+                margin-top: 20px;
+            }
+
+            .tagline {
+                position: static;
+                font-size: 5.5vw;
+                white-space: normal;
+                margin-top: 10px;
+            }
+
+            /* Hide characters — they'd overflow and overlap text */
+            .characters {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="page">
-        <img class="logo-img" src="assets/logo.png" alt="logo">
-        <a class="site-name" href="#">michelle jiang</a>
+        <div class="nav-row">
+            <a href="#"><img class="logo-img" src="assets/logo.png" alt="logo"></a>
+            <a class="site-name" href="#">michelle jiang</a>
+        </div>
         <nav>
             <a href="about.html">about</a>
             <a href="projects.html">projects</a>
