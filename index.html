@@ -102,6 +102,15 @@
             white-space: nowrap;
         }
 
+        /* Line art: vertically centered with welcome text, flush to right edge */
+        .line-art {
+            position: absolute;
+            left: 52vw;
+            top: 21.3vw;
+            width: 52vw;
+            height: auto;
+        }
+
         /* Characters image: bottom-right, moved up to fit within viewport */
         .characters {
             position: absolute;
@@ -155,6 +164,11 @@
                 top: 44vw;
                 width: 28vw;
                 height: 18vw;
+            }
+
+            .line-art {
+                top: 20vw;
+                width: 48vw;
             }
         }
 
@@ -226,13 +240,17 @@
             .characters {
                 display: none;
             }
+
+            .line-art {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="page">
         <div class="nav-row">
-            <a href="#"><img class="logo-img" src="assets/logo.png" alt="logo"></a>
+            <a href="#"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
             <a class="site-name" href="#">michelle jiang</a>
         </div>
         <nav>
@@ -242,7 +260,8 @@
         </nav>
         <p class="welcome">Welcome!</p>
         <p class="tagline">this is michelle&#8217;s portfolio.</p>
-        <img class="characters" src="assets/twoLittleGuys.png" alt="characters">
+        <img class="line-art" src="assets/lineArt-home.svg" alt="line art">
+        <img class="characters" src="assets/twoLittleGuys.svg" alt="characters">
     </div>
 </body>
 </html>
