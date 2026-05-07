@@ -150,8 +150,8 @@
            Container: 179.966x186.023px; inner clip 141.647x150.839px; img width 193.82% */
         .char-container {
             position: absolute;
-            left: 55vw;
-            top: 9vw;
+            left: 58vw;
+            top: 8.5vw;
             width: 12.5vw;
             height: 12.92vw;
             display: flex;
@@ -172,8 +172,8 @@
         }
 
         .char-clip img {
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 80%;
             object-fit: contain;
         }
 
@@ -181,7 +181,7 @@
         .char-star-container {
             position: absolute;
             left: 78vw;
-            top: 28vw;
+            top: 30vw;
             width: 12.5vw;
             height: 12.92vw;
             display: flex;
@@ -200,8 +200,8 @@
         }
 
         .char-star-clip img {
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 80%;
             object-fit: contain;
         }
 
@@ -355,14 +355,47 @@
             flex-shrink: 0;
             width: 18vw;
             overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .modal-images::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-images.show-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #ccc transparent;
+            -ms-overflow-style: auto;
+        }
+
+        .modal-images.show-scrollbar::-webkit-scrollbar {
+            display: block;
+            width: 4px;
+        }
+
+        .modal-images.show-scrollbar::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        .modal-images.hide-clones .modal-img-clone {
+            display: none;
         }
 
         .modal-img-slot {
-            background: #d9d9d9;
             border-radius: 0.5vw;
             width: 100%;
             aspect-ratio: 4 / 3;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .modal-img-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .modal-text {
@@ -662,9 +695,13 @@
             <div class="modal-body">
                 <!-- Image slots (blank for now) -->
                 <div class="modal-images">
-                    <div class="modal-img-slot"></div>
-                    <div class="modal-img-slot"></div>
-                    <div class="modal-img-slot"></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_3335.jpg" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_2489.JPG" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_5267.jpg" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_4606.JPG" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_1502.JPG" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_1071.JPG" alt=""></div>
+                    <div class="modal-img-slot"><img src="aboutPhotos/IMG_6518.jpg" alt=""></div>
                 </div>
 
                 <!-- Text -->
@@ -680,21 +717,70 @@
     </div>
 
     <script>
-        const modal   = document.getElementById('more-modal');
-        const openBtn = document.getElementById('more-link');
+        const modal    = document.getElementById('more-modal');
+        const openBtn  = document.getElementById('more-link');
         const closeBtn = document.getElementById('modal-close');
+        const imgList  = document.querySelector('.modal-images');
+
+        // Duplicate slots for seamless looping; mark clones so we can hide them on hover
+        const origSlots = Array.from(imgList.children);
+        origSlots.forEach(function(slot) {
+            const clone = slot.cloneNode(true);
+            clone.classList.add('modal-img-clone');
+            imgList.appendChild(clone);
+        });
+
+        let scrollTimer = null;
+        let paused = false;
+
+        function startAutoScroll() {
+            clearInterval(scrollTimer);
+            scrollTimer = setInterval(function() {
+                if (paused) return;
+                imgList.scrollTop += 1;
+                if (imgList.scrollTop >= imgList.scrollHeight / 2) {
+                    imgList.scrollTop -= imgList.scrollHeight / 2;
+                }
+            }, 20);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(scrollTimer);
+            scrollTimer = null;
+        }
+
+        imgList.addEventListener('mouseenter', function() {
+            paused = true;
+            // Normalize position into the original half before hiding clones
+            const halfH = imgList.scrollHeight / 2;
+            if (imgList.scrollTop >= halfH) {
+                imgList.scrollTop -= halfH;
+            }
+            imgList.classList.add('hide-clones', 'show-scrollbar');
+        });
+
+        imgList.addEventListener('mouseleave', function() {
+            imgList.classList.remove('hide-clones', 'show-scrollbar');
+            paused = false;
+        });
 
         openBtn.addEventListener('click', function(e) {
             e.preventDefault();
             modal.classList.add('active');
+            imgList.scrollTop = 0;
+            startAutoScroll();
         });
 
         closeBtn.addEventListener('click', function() {
             modal.classList.remove('active');
+            stopAutoScroll();
         });
 
         modal.addEventListener('click', function(e) {
-            if (e.target === modal) modal.classList.remove('active');
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                stopAutoScroll();
+            }
         });
     </script>
 </body>
