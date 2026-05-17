@@ -8,374 +8,173 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-        }
-
+        /* ── Projects — mobile base ── */
         body {
-            background: white;
-            overflow-x: hidden;
-        }
-
-        /* All values scaled from 1440px design width (px / 14.4 = vw) */
-
-        /* ── Nav ── */
-        .logo-img {
-            position: absolute;
-            left: 1.18vw;
-            top: 1.32vw;
-            width: 5vw;
-            height: 3.68vw;
-            object-fit: contain;
-            z-index: 10;
-        }
-
-        .site-name {
-            position: absolute;
-            left: 5.76vw;
-            top: 2.5vw;
-            font-family: 'Hubballi', sans-serif;
-            font-size: 2.15vw;
-            color: black;
-            white-space: nowrap;
-            text-decoration: none;
-            z-index: 10;
-        }
-
-        nav {
-            position: absolute;
-            right: 1.32vw;
-            top: 2.5vw;
             display: flex;
-            gap: 2.5vw;
-            z-index: 10;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        nav a {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 2.15vw;
-            color: black;
-            text-decoration: none;
-            white-space: nowrap;
+        .projects-main {
+            flex: 1;
+            padding: 1.25rem 1.25rem 3rem;
         }
 
-        nav a:hover {
-            opacity: 0.6;
-        }
-
-        /* Active underline for current page */
-        nav a.active {
-            text-decoration: underline;
-            text-decoration-color: #480e78;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 6px;
-        }
-
-        /* "project gallery" heading — matches "a little about me" on about page */
         .page-heading {
-            position: absolute;
-            left: 5.76vw;
-            top: 11.5vw;
-            font-family: 'Hubballi', sans-serif;
-            font-size: 4vw;
-            color: black;
-            white-space: nowrap;
-            z-index: 10;
+            font-family: var(--font-body);
+            font-size: 1.75rem;
+            color: #000;
+            margin-bottom: 1.25rem;
         }
 
-        /* ── Page body ── */
-        /* Contains squiggle, characters, and panel — starts at top of page */
         .projects-area {
             position: relative;
-            padding-top: 19.86vw; /* panel top: 286px */
-            padding-bottom: 6vw;
         }
 
-        /* Squiggle decoration: left 732px, top 97px, 749x206px */
-        .squiggle {
-            position: absolute;
-            left: 50.83vw;
-            top: 6.74vw;
-            width: 52.01vw;
-            object-fit: contain;
-            pointer-events: none;
-        }
+        .squiggle { display: none; }
 
-        /* ── Rounded panel: left 69px, width 1301px, radius 79px ── */
         .projects-panel {
-            margin: 0 4.79vw;
-            background: #e8e4eb;
-            border-radius: 5.49vw;
-            padding: 5.69vw 7.92vw;
-            position: relative; /* so characters inside can be absolute */
-        }
-
-        /* Fluffy character: left 27px (page) → sticks out left of panel (panel left: 69px)
-           top 401px (page) → 401 - 286 = 115px below panel top = 7.99vw into panel area */
-        .char-fluffy {
-            position: absolute;
-            left: -4.31vw; /* 27px - 69px = -42px relative to panel → -2.92vw */
-            top: -1.87vw;  /* 401px - 286px = 115px, but panel padding-top is 5.69vw; so char is above content: (401-286)/14.4 = 7.99vw from panel top, minus panel padding offset */
-            width: 8.16vw;
-            height: 8.47vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .char-fluffy-inner {
-            transform: rotate(9.65deg);
-            flex-shrink: 0;
-        }
-
-        .char-fluffy-clip {
-            width: 7.02vw;
-            height: 7.4vw;
+            background: var(--surface);
+            border-radius: 1.5rem;
+            padding: 2rem 1.25rem;
             position: relative;
-            overflow: hidden;
         }
 
-        .char-fluffy-clip img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Star character: left 1270px → relative to panel (left 69px) = 1201px = 83.4vw
-           top 710px → relative to panel top (286px) = 424px = 29.44vw */
-        .char-star {
-            position: absolute;
-            left: 83.4vw;
-            top: 29.44vw;
-            width: 8.16vw;
-            height: 8.47vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .char-star-inner {
-            transform: rotate(9.65deg);
-            flex-shrink: 0;
-        }
-
-        .char-star-clip {
-            width: 7.02vw;
-            height: 7.4vw;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .char-star-clip img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .char-fluffy,
+        .char-star { display: none; }
 
         /* ── Projects grid ── */
         /* To add a new project: copy one .project-card block inside .projects-grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4vw 11.53vw;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
         }
 
         .project-card {
-            background: #d9d9d9;
-            border-radius: 0.7vw;
+            background: var(--surface-2);
+            border-radius: 0.625rem;
             aspect-ratio: 445 / 230;
         }
 
-        /* On desktop nav-row children are absolutely positioned — wrapper is invisible */
-        .nav-row {
-            display: contents;
-        }
+        /* ── Tablet (768px+) ── */
+        @media (min-width: 768px) {
+            .projects-main { padding: 1.5rem 1.75rem 3rem; }
+            .page-heading { font-size: 2rem; }
 
-        /* ── Tablet (768px – 1024px) ── */
-        @media (max-width: 1024px) {
-            .logo-img {
-                width: 40px;
-                height: 30px;
-                left: 16px;
-                top: 14px;
+            .squiggle {
+                display: block;
+                position: absolute;
+                right: 0;
+                top: -1rem;
+                width: 52%;
+                pointer-events: none;
+                opacity: 0.8;
             }
 
-            .site-name {
-                left: 64px;
-                top: 18px;
-                font-size: 20px;
-            }
-
-            nav {
-                right: 16px;
-                top: 18px;
-                gap: 20px;
-            }
-
-            nav a { font-size: 20px; }
-
-            .page-heading {
-                font-size: 4vw;
-                top: 12vw;
+            .projects-panel {
+                border-radius: 2rem;
+                padding: 2.5rem 2rem;
             }
 
             .projects-grid {
-                gap: 3vw 8vw;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem 2.5rem;
             }
         }
 
-        /* ── Mobile (<768px) ── */
-        @media (max-width: 767px) {
-            body {
-                overflow: auto;
-                display: flex;
-                flex-direction: column;
+        /* ── Desktop (1024px+) ── */
+        @media (min-width: 1024px) {
+            .projects-main { padding: 1.5rem 2.5rem 4rem; }
+            .page-heading { font-size: 2.25rem; }
+
+            .projects-panel {
+                border-radius: 5.49vw;
+                padding: 5.69vw 7.92vw;
             }
 
-            /* Nav */
-            .nav-row {
+            .projects-grid { gap: 4vw 11.5vw; }
+            .project-card { border-radius: 0.7vw; }
+
+            .char-fluffy {
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                padding: 14px 20px 0;
-                margin-bottom: 8px;
+                justify-content: center;
+                position: absolute;
+                top: -2rem;
+                left: -2rem;
+                width: 5.5rem;
+                pointer-events: none;
             }
 
-            .logo-img {
-                position: static;
-                width: 36px;
-                height: 26px;
-                flex-shrink: 0;
-                z-index: auto;
+            .char-fluffy img {
+                width: 80%;
+                transform: rotate(9.65deg);
             }
 
-            .site-name {
-                position: static;
-                font-size: 18px;
-                z-index: auto;
-            }
-
-            nav {
-                position: static;
-                gap: 20px;
-                padding: 0 20px;
-                margin-bottom: 8px;
-                z-index: auto;
-            }
-
-            nav a { font-size: 16px; }
-
-            /* Page heading */
-            .page-heading {
-                position: static;
-                font-size: 28px;
-                white-space: normal;
-                padding: 0 20px;
-                margin-bottom: 0;
-                z-index: auto;
-            }
-
-            /* Projects area */
-            .projects-area {
-                padding-top: 16px;
-                padding-bottom: 40px;
-            }
-
-            /* Hide squiggle decoration */
-            .squiggle {
-                display: none;
-            }
-
-            /* Panel */
-            .projects-panel {
-                margin: 0 16px;
-                border-radius: 24px;
-                padding: 32px 20px;
-            }
-
-            /* Hide decorative characters inside panel */
-            .char-fluffy,
             .char-star {
-                display: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                bottom: -2rem;
+                right: -2rem;
+                width: 5.5rem;
+                pointer-events: none;
             }
 
-            /* Single-column grid */
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .project-card {
-                border-radius: 10px;
+            .char-star img {
+                width: 80%;
+                transform: rotate(9.65deg);
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Nav -->
-    <div class="nav-row">
-        <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
-        <a class="site-name" href="index.html">michelle jiang</a>
-    </div>
-    <nav>
-        <a href="about.html">about</a>
-        <a href="projects.html" class="active">projects</a>
-        <a href="experience.html">experience</a>
-    </nav>
-
-    <p class="page-heading">project gallery</p>
-
-    <div class="projects-area">
-
-        <!-- Squiggle decoration (top right) -->
-        <img class="squiggle" src="assets/lineArt-home.svg" alt="">
-
-        <!-- Main panel -->
-        <div class="projects-panel">
-
-            <!-- Fluffy character (left edge) -->
-            <div class="char-fluffy">
-                <div class="char-fluffy-inner">
-                    <div class="char-fluffy-clip">
-                        <img src="assets/oneLittleBlob.svg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Star character (right edge) -->
-            <div class="char-star">
-                <div class="char-star-inner">
-                    <div class="char-star-clip">
-                        <img src="assets/oneLittleStar.svg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <!-- =============================================
-                 PROJECT GRID
-                 To add a new project, copy a .project-card
-                 block below and paste it inside this div.
-                 ============================================= -->
-            <div class="projects-grid">
-
-                <div class="project-card">
-                    <!-- Project content goes here -->
-                </div>
-
-            </div>
-
+    <header class="site-header">
+        <div class="nav-brand">
+            <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
+            <a class="site-name" href="index.html">michelle jiang</a>
         </div>
-    </div>
+        <nav>
+            <a href="about.html">about</a>
+            <a href="projects.html" class="active">projects</a>
+            <a href="experience.html">experience</a>
+        </nav>
+    </header>
 
+    <main class="projects-main">
+        <h1 class="page-heading">project gallery</h1>
+
+        <div class="projects-area">
+            <img class="squiggle" src="assets/lineArt-home.svg" alt="">
+
+            <div class="projects-panel">
+
+                <div class="char-fluffy">
+                    <img src="assets/oneLittleBlob.svg" alt="">
+                </div>
+
+                <div class="char-star">
+                    <img src="assets/oneLittleStar.svg" alt="">
+                </div>
+
+                <!-- =============================================
+                     PROJECT GRID
+                     To add a new project, copy a .project-card
+                     block below and paste it inside this div.
+                     ============================================= -->
+                <div class="projects-grid">
+
+                    <div class="project-card">
+                        <!-- Project content goes here -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

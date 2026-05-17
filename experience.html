@@ -8,494 +8,276 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-        }
-
+        /* ── Experience — mobile base ── */
         body {
-            background: white;
-            overflow-x: hidden;
-        }
-
-        /* ── Nav ── */
-        .logo-img {
-            position: absolute;
-            left: 1.18vw;
-            top: 1.32vw;
-            width: 5vw;
-            height: 3.68vw;
-            object-fit: contain;
-            z-index: 10;
-        }
-
-        .site-name {
-            position: absolute;
-            left: 5.76vw;
-            top: 2.5vw;
-            font-family: 'Hubballi', sans-serif;
-            font-size: 2.15vw;
-            color: black;
-            white-space: nowrap;
-            text-decoration: none;
-            z-index: 10;
-        }
-
-        nav {
-            position: absolute;
-            right: 1.32vw;
-            top: 2.5vw;
             display: flex;
-            gap: 2.5vw;
-            z-index: 10;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        nav a {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 2.15vw;
-            color: black;
-            text-decoration: none;
-            white-space: nowrap;
+        .experience-main {
+            flex: 1;
+            padding: 1.25rem 1.25rem 3rem;
         }
 
-        nav a:hover { opacity: 0.6; }
-
-        nav a.active {
-            text-decoration: underline;
-            text-decoration-color: #480e78;
-            text-decoration-thickness: 3px;
-            text-underline-offset: 6px;
-        }
-
-        /* ── Page heading ── */
         .page-heading {
-            position: absolute;
-            left: 5.76vw;
-            top: 11.5vw;
-            font-family: 'Hubballi', sans-serif;
-            font-size: 4vw;
-            color: black;
-            white-space: nowrap;
-            z-index: 10;
+            font-family: var(--font-body);
+            font-size: 1.75rem;
+            color: #000;
+            margin-bottom: 1.5rem;
         }
 
-        /* ── Experience area ── */
         .experience-area {
             position: relative;
-            padding-top: 17vw; /* clear nav + heading */
-            padding-bottom: 8vw;
         }
 
-        /* ── Vertical squiggle spine ──
-           Original image: ~66.74vw wide × 18.33vw tall (horizontal squiggle)
-           Rotated 90deg to become: 18.33vw wide × 66.74vw tall (vertical spine)
-           Math: DOM left = -(66.74/2 - 18.33/2)vw, DOM top = (66.74/2 - 18.33/2)vw */
-        .timeline-spine {
-            position: absolute;
-            left: calc(50% - 9.165vw);
-            top: 14vw;
-            width: 18.33vw;
-            height: 66.74vw;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
+        .timeline-spine,
+        .char-fluffy,
+        .char-star { display: none; }
 
-        .timeline-spine img {
-            position: absolute;
-            width: 66.74vw;
-            height: 18.33vw;
-            max-width: none;
-            transform: rotate(90deg);
-            left: -24.205vw;
-            top: 24.205vw;
-        }
-
-        /* ── Fluffy character: left 27px, top 401px ── */
-        .char-fluffy {
-            position: absolute;
-            left: 1.88vw;
-            top: 27.85vw;
-            width: 8.16vw;
-            height: 8.47vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .char-fluffy-inner { transform: rotate(9.65deg); flex-shrink: 0; }
-
-        .char-fluffy-clip {
-            width: 7.02vw;
-            height: 7.4vw;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .char-fluffy-clip img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* ── Star character: left 1279px, top 711px ── */
-        .char-star {
-            position: absolute;
-            left: 88.82vw;
-            top: 49.38vw;
-            width: 8.16vw;
-            height: 8.47vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .char-star-inner { transform: rotate(9.65deg); flex-shrink: 0; }
-
-        .char-star-clip {
-            width: 7.02vw;
-            height: 7.4vw;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .char-star-clip img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* ════════════════════════════════════════════
-           TIMELINE
-           To add a new entry:
-             1. Copy a .timeline-entry block below
-             2. Alternate class="timeline-entry left" and "right"
-             3. Fill in role, org, date, and bullet points
-           ════════════════════════════════════════════ */
+        /* ── Timeline ── */
+        /* To add a new entry: copy a .timeline-entry block,
+           toggle class between "left" and "right", fill in content */
         .timeline {
             display: flex;
             flex-direction: column;
-            gap: 3vw;
-            position: relative;
-            z-index: 2;
+            gap: 1rem;
         }
 
-        /* Each entry: card sits on one side, connector extends toward center spine */
-        .timeline-entry {
-            position: relative;
-            width: 27.08vw;   /* ~390px card width */
-            min-height: 21.88vw; /* ~315px */
-        }
+        .timeline-entry { width: 100%; }
 
-        .timeline-entry.left {
-            align-self: flex-start;
-            margin-left: 11.81vw; /* 170px from left edge */
-        }
-
-        .timeline-entry.right {
-            align-self: flex-end;
-            margin-right: 6.53vw; /* ~94px from right edge */
-        }
-
-        /* Connector lines from card to center spine */
-        .timeline-entry.left::after {
-            content: '';
-            position: absolute;
-            top: 4.51vw;         /* 20.63% × 315px ≈ 65px */
-            right: -16vw;
-            width: 16vw;
-            height: 1px;
-            background: #aaa;
-            z-index: 0;
-        }
-
-        .timeline-entry.right::before {
-            content: '';
-            position: absolute;
-            top: 4.24vw;         /* 19.37% × 315px ≈ 61px */
-            left: -16vw;
-            width: 16vw;
-            height: 1px;
-            background: #aaa;
-            z-index: 0;
-        }
-
-        /* Card box */
         .entry-card {
-            background: #e8e4eb;
-            border-radius: 1.6vw; /* 23px */
-            padding: 1.67vw 1.39vw 1.67vw 1.39vw;
-            height: 100%;
-            min-height: 21.88vw;
-            position: relative;
-            z-index: 2;
+            background: var(--surface);
+            border-radius: 0.875rem;
+            padding: 1rem 1.125rem;
         }
 
-        .entry-role {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 1.67vw;
-            color: black;
-            white-space: nowrap;
-        }
-
-        .entry-org {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 1.67vw;
-            color: black;
-            white-space: nowrap;
-        }
-
+        .entry-role,
+        .entry-org,
         .entry-date {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 1.67vw;
-            color: black;
-            white-space: nowrap;
-            margin-bottom: 1.5vw;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #000;
         }
+
+        .entry-date { margin-bottom: 0.625rem; }
 
         .entry-bullets {
-            font-family: 'Hubballi', sans-serif;
-            font-size: 1.67vw;
-            color: black;
-            margin-left: 2vw;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #000;
+            margin-left: 1.25rem;
         }
 
-        .entry-bullets li {
-            white-space: nowrap;
-        }
-
-        /* On desktop nav-row children are absolutely positioned — wrapper is invisible */
-        .nav-row {
-            display: contents;
-        }
-
-        /* ── Tablet (768px – 1024px) ── */
-        @media (max-width: 1024px) {
-            .logo-img {
-                width: 40px;
-                height: 30px;
-                left: 16px;
-                top: 14px;
-            }
-
-            .site-name {
-                left: 64px;
-                top: 18px;
-                font-size: 20px;
-            }
-
-            nav {
-                right: 16px;
-                top: 18px;
-                gap: 20px;
-            }
-
-            nav a { font-size: 20px; }
-
-            .page-heading {
-                font-size: 4vw;
-                top: 12vw;
-            }
+        /* ── Tablet (768px+) ── */
+        @media (min-width: 768px) {
+            .experience-main { padding: 1.5rem 2rem 3rem; }
+            .page-heading { font-size: 2rem; }
 
             .entry-role,
             .entry-org,
             .entry-date,
-            .entry-bullets {
-                font-size: 1.8vw;
+            .entry-bullets { font-size: 1.0625rem; }
+
+            .entry-card {
+                border-radius: 1rem;
+                padding: 1.25rem 1.5rem;
             }
         }
 
-        /* ── Mobile (<768px) ── */
-        @media (max-width: 767px) {
-            body {
-                overflow: auto;
-                display: flex;
-                flex-direction: column;
+        /* ── Desktop (1024px+) — alternating timeline layout ── */
+        @media (min-width: 1024px) {
+            .experience-main { padding: 1.5rem 2.5rem 4rem; }
+            .page-heading { font-size: 2.25rem; }
+
+            /* Vertical squiggle spine through the centre */
+            .timeline-spine {
+                display: block;
+                position: absolute;
+                left: calc(50% - 9.165vw);
+                top: 0;
+                width: 18.33vw;
+                height: 66.74vw;
+                overflow: hidden;
+                pointer-events: none;
+                z-index: 1;
             }
 
-            /* Nav */
-            .nav-row {
+            .timeline-spine img {
+                position: absolute;
+                width: 66.74vw;
+                height: 18.33vw;
+                max-width: none;
+                transform: rotate(90deg);
+                left: -24.205vw;
+                top: 24.205vw;
+            }
+
+            /* Decorative characters */
+            .char-fluffy {
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                padding: 14px 20px 0;
-                margin-bottom: 8px;
+                justify-content: center;
+                position: absolute;
+                left: 1.88vw;
+                top: 14vw;
+                width: 5.5rem;
+                pointer-events: none;
+                z-index: 3;
             }
 
-            .logo-img {
-                position: static;
-                width: 36px;
-                height: 26px;
-                flex-shrink: 0;
-                z-index: auto;
+            .char-fluffy img {
+                width: 80%;
+                transform: rotate(9.65deg);
             }
 
-            .site-name {
-                position: static;
-                font-size: 18px;
-                z-index: auto;
-            }
-
-            nav {
-                position: static;
-                gap: 20px;
-                padding: 0 20px;
-                margin-bottom: 8px;
-                z-index: auto;
-            }
-
-            nav a { font-size: 16px; }
-
-            /* Page heading */
-            .page-heading {
-                position: static;
-                font-size: 28px;
-                white-space: normal;
-                padding: 0 20px;
-                margin-bottom: 0;
-                z-index: auto;
-            }
-
-            /* Experience area */
-            .experience-area {
-                padding-top: 16px;
-                padding-bottom: 40px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            /* Hide decorative spine and characters */
-            .timeline-spine,
-            .char-fluffy,
             .char-star {
-                display: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: 0;
+                top: 35vw;
+                width: 5.5rem;
+                pointer-events: none;
+                z-index: 3;
             }
 
-            /* Single-column timeline: all entries full-width, left-aligned */
+            .char-star img {
+                width: 80%;
+                transform: rotate(9.65deg);
+            }
+
+            /* Timeline alternating layout */
             .timeline {
-                gap: 16px;
+                gap: 3vw;
+                position: relative;
+                z-index: 2;
             }
 
             .timeline-entry {
-                width: 100%;
-                min-height: auto;
-                align-self: stretch !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
+                width: 27vw;
+                min-height: 21.88vw;
+                position: relative;
             }
 
-            /* Remove connector lines */
-            .timeline-entry.left::after,
+            .timeline-entry.left {
+                align-self: flex-start;
+                margin-left: 11.81vw;
+            }
+
+            .timeline-entry.right {
+                align-self: flex-end;
+                margin-right: 6.53vw;
+            }
+
+            /* Connector lines to the centre spine */
+            .timeline-entry.left::after {
+                content: '';
+                position: absolute;
+                top: 4.5vw;
+                right: -16vw;
+                width: 16vw;
+                height: 1px;
+                background: #aaa;
+                z-index: 0;
+            }
+
             .timeline-entry.right::before {
-                display: none;
+                content: '';
+                position: absolute;
+                top: 4.24vw;
+                left: -16vw;
+                width: 16vw;
+                height: 1px;
+                background: #aaa;
+                z-index: 0;
             }
 
-            /* Cards */
             .entry-card {
-                padding: 16px;
-                border-radius: 14px;
-                min-height: auto;
+                border-radius: 1.6vw;
+                padding: 1.67vw 1.39vw;
+                min-height: 21.88vw;
+                position: relative;
+                z-index: 2;
             }
 
             .entry-role,
             .entry-org,
             .entry-date,
-            .entry-bullets {
-                font-size: 15px;
-                white-space: normal;
-            }
+            .entry-bullets { font-size: 1.125rem; }
 
-            .entry-date { margin-bottom: 10px; }
-
-            .entry-bullets {
-                margin-left: 18px;
-            }
+            .entry-date { margin-bottom: 1.5vw; }
+            .entry-bullets { margin-left: 1.5vw; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Nav -->
-    <div class="nav-row">
-        <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
-        <a class="site-name" href="index.html">michelle jiang</a>
-    </div>
-    <nav>
-        <a href="about.html">about</a>
-        <a href="projects.html">projects</a>
-        <a href="experience.html" class="active">experience</a>
-    </nav>
-
-    <p class="page-heading">experience</p>
-
-    <div class="experience-area">
-
-        <!-- Decorative vertical squiggle spine -->
-        <div class="timeline-spine">
-            <img src="assets/lineArt-home.svg" alt="">
+    <header class="site-header">
+        <div class="nav-brand">
+            <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
+            <a class="site-name" href="index.html">michelle jiang</a>
         </div>
+        <nav>
+            <a href="about.html">about</a>
+            <a href="projects.html">projects</a>
+            <a href="experience.html" class="active">experience</a>
+        </nav>
+    </header>
 
-        <!-- Fluffy character -->
-        <div class="char-fluffy">
-            <div class="char-fluffy-inner">
-                <div class="char-fluffy-clip">
-                    <img src="assets/oneLittleBlob.svg" alt="">
-                </div>
-            </div>
-        </div>
+    <main class="experience-main">
+        <h1 class="page-heading">experience</h1>
 
-        <!-- Star character -->
-        <div class="char-star">
-            <div class="char-star-inner">
-                <div class="char-star-clip">
-                    <img src="assets/oneLittleStar.svg" alt="">
-                </div>
-            </div>
-        </div>
+        <div class="experience-area">
 
-        <!-- =====================================================
-             TIMELINE ENTRIES
-             To add a new entry:
-               • Copy a .timeline-entry block
-               • Toggle class between "left" and "right"
-               • Update role, org, date, and bullet points
-             ===================================================== -->
-        <div class="timeline">
-
-            <div class="timeline-entry left">
-                <div class="entry-card">
-                    <p class="entry-role">Enterprise Technology Intern</p>
-                    <p class="entry-org">@ State Farm</p>
-                    <p class="entry-date">May 2026 - Aug 2026</p>
-                    <ul class="entry-bullets">
-                        <li>data engineering and aggregation</li>
-                    </ul>
-                </div>
+            <!-- Decorative vertical squiggle spine (desktop only) -->
+            <div class="timeline-spine">
+                <img src="assets/lineArt-home.svg" alt="">
             </div>
 
-            <div class="timeline-entry right">
-                <div class="entry-card">
-                    <p class="entry-role">Effective Coding with AI TA</p>
-                    <p class="entry-org">@ CMU School of Computer Science</p>
-                    <p class="entry-date">January 2026 - present</p>
-                    <ul class="entry-bullets">
-                        <li>ta duties ts</li>
-                    </ul>
-                </div>
+            <div class="char-fluffy">
+                <img src="assets/oneLittleBlob.svg" alt="">
             </div>
 
-        </div>
-    </div>
+            <div class="char-star">
+                <img src="assets/oneLittleStar.svg" alt="">
+            </div>
 
+            <!-- =====================================================
+                 TIMELINE ENTRIES
+                 To add a new entry:
+                   • Copy a .timeline-entry block
+                   • Toggle class between "left" and "right"
+                   • Update role, org, date, and bullet points
+                 ===================================================== -->
+            <div class="timeline">
+
+                <div class="timeline-entry left">
+                    <div class="entry-card">
+                        <p class="entry-role">Enterprise Technology Intern</p>
+                        <p class="entry-org">@ State Farm</p>
+                        <p class="entry-date">May 2026 - Aug 2026</p>
+                        <ul class="entry-bullets">
+                            <li>data engineering and aggregation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-entry right">
+                    <div class="entry-card">
+                        <p class="entry-role">Effective Coding with AI TA</p>
+                        <p class="entry-org">@ CMU School of Computer Science</p>
+                        <p class="entry-date">January 2026 - present</p>
+                        <ul class="entry-bullets">
+                            <li>ta duties ts</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
 </body>
 </html>
