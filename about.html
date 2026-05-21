@@ -10,61 +10,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Hubballi&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ── About — mobile base ── */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .about-main {
-            flex: 1;
-            padding: 1.25rem 1.25rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: white;
+            overflow-x: hidden;
+        }
+
+        /* All values scaled from 1440px design width (px / 14.4 = vw) */
+        .page {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            padding-bottom: 4vw;
+        }
+
+        /* On desktop contact buttons are absolutely positioned */
+        .contact-buttons-grid {
+            display: contents;
         }
 
         /* ── About section ── */
-        .about-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
 
+        /* "a little about me": left 83px, top 219px, 64px */
         .about-heading {
-            font-family: var(--font-body);
-            font-size: 1.75rem;
-            color: #000;
-            margin-bottom: 0.875rem;
+            position: absolute;
+            left: 5.76vw;
+            top: 13.8vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 3.6vw;
+            color: black;
+            white-space: nowrap;
         }
 
+        /* Bio paragraph: left 83px, top 326px, 32px, line-height 38px, width 581px */
         .bio-text {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.65;
-            color: #000;
-            margin-bottom: 0.5rem;
+            position: absolute;
+            left: 5.76vw;
+            top: 20vw;
+            width: 42vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.5vw;
+            line-height: 2.4vw;
+            color: black;
         }
 
+        /* "+ more!": left 83px, top 594px, 24px, underlined */
         .more-link {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: #000;
+            position: absolute;
+            left: 5.76vw;
+            top: 31vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.5vw;
+            color: black;
             text-decoration: underline;
-            display: inline-block;
+            white-space: nowrap;
         }
 
-        .more-link:hover { opacity: 0.6; }
+        .more-link:hover {
+            opacity: 0.6;
+        }
 
-        .about-right { position: relative; }
-
+        /* Profile photo circle: left 862px, top 261px, 394x393px */
         .profile-photo-wrap {
-            width: 180px;
-            height: 180px;
+            position: absolute;
+            left: 59.86vw;
+            top: 12vw;
+            width: 27.36vw;
+            height: 27.29vw;
             border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto;
         }
 
         .profile-photo-wrap img {
@@ -74,66 +98,145 @@
             display: block;
         }
 
-        .char-blob,
-        .char-star { display: none; }
-
-        /* ── Contact section ── */
-        .contact-heading {
-            font-family: var(--font-body);
-            font-size: 1.75rem;
-            color: #000;
-            margin-bottom: 1rem;
-        }
-
-        .contact-buttons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
-
-        .contact-btn {
+        /* Fluffy character: left 817px, top 187px, rotated -17.23deg
+           Container: 179.966x186.023px; inner clip 141.647x150.839px; img width 193.82% */
+        .char-container {
+            position: absolute;
+            left: 58vw;
+            top: 8.5vw;
+            width: 12.5vw;
+            height: 12.92vw;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: var(--surface);
-            border-radius: 0.75rem;
+            justify-content: center;
+        }
+
+        .char-rotated {
+            transform: rotate(-17.23deg);
+            flex-shrink: 0;
+        }
+
+        .char-clip {
+            width: 9.83vw;
+            height: 10.47vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .char-clip img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* Star character: bottom-right of profile photo */
+        .char-star-container {
+            position: absolute;
+            left: 78vw;
+            top: 30vw;
+            width: 12.5vw;
+            height: 12.92vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .char-star-rotated {
+            transform: rotate(-9deg);
+            flex-shrink: 0;
+        }
+
+        .char-star-clip {
+            width: 9.83vw;
+            height: 10.47vw;
+        }
+
+        .char-star-clip img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* ── Contact section ── */
+
+        /* "contact me": left 83px, top 680px, 64px */
+        .contact-heading {
+            position: absolute;
+            left: 5.76vw;
+            top: 38vw;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 3.6vw;
+            color: black;
+            white-space: nowrap;
+        }
+
+        /* Buttons: top 820px, height 78px, width 208px, radius 17px */
+        .contact-btn {
+            position: absolute;
+            top: 45vw;
+            width: 14.44vw;
+            height: 5.42vw;
+            background: #e8e4eb;
+            border-radius: 1.18vw;
+            display: flex;
+            align-items: center;
+            gap: 0.7vw;
+            padding: 0 1.2vw;
             text-decoration: none;
-            color: #000;
+            color: black;
             transition: background 0.2s, color 0.2s;
         }
 
-        .contact-btn:hover { background: var(--accent); color: #fff; }
-        .contact-btn:hover .btn-icon { filter: invert(1) brightness(2); }
+        .contact-btn:hover {
+            background: #480e78;
+            color: white;
+        }
 
-        .btn-linkedin .btn-icon { filter: brightness(0); }
-        .btn-linkedin:hover .btn-icon { filter: brightness(0) invert(1); }
+        .contact-btn:hover .btn-icon {
+            filter: invert(1) brightness(2);
+        }
 
         .btn-icon {
-            width: 1.75rem;
-            height: 1.75rem;
+            width: 3.33vw;
+            height: 3.33vw;
             object-fit: contain;
             flex-shrink: 0;
+        }
+
+        .btn-linkedin .btn-icon {
+            filter: brightness(0);
+        }
+
+        .btn-linkedin:hover .btn-icon {
+            filter: brightness(0) invert(1);
         }
 
         .btn-label-wrap {
             display: flex;
             flex-direction: column;
+            flex: 1;
+            align-items: center;
         }
 
         .btn-label {
-            font-family: var(--font-body);
-            font-size: 1rem;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.67vw;
             white-space: nowrap;
         }
 
         .btn-sub {
-            font-family: var(--font-body);
-            font-size: 0.75rem;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 0.97vw;
             white-space: nowrap;
         }
 
-        /* ── Modal ── */
+        /* Button positions: left 167, 466, 765, 1064 */
+        .btn-email    { left: 11.6vw; }
+        .btn-linkedin { left: 32.36vw; }
+        .btn-github   { left: 53.13vw; }
+        .btn-resume   { left: 73.89vw; }
+
+        /* ── More modal ── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -144,12 +247,14 @@
             justify-content: center;
         }
 
-        .modal-overlay.active { display: flex; }
+        .modal-overlay.active {
+            display: flex;
+        }
 
         .modal-panel {
-            background: #fff;
-            border-radius: 1rem;
-            width: min(900px, 92vw);
+            background: white;
+            border-radius: 2vw;
+            width: min(62vw, 92vw);
             max-height: 82vh;
             display: flex;
             flex-direction: column;
@@ -160,21 +265,20 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.25rem 1.5rem 0.75rem;
+            padding: 2vh 2vw 1vh 2vw;
             flex-shrink: 0;
         }
 
         .modal-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #000;
+            font-family: 'Ingrid Darling', sans-serif;
+            font-size: 3.5vw;
+            color: black;
             white-space: nowrap;
         }
 
         .modal-close {
-            width: 2rem;
-            height: 2rem;
-            min-width: 2rem;
+            width: 1.6vw;
+            height: 1.6vw;
             background: none;
             border: none;
             cursor: pointer;
@@ -190,27 +294,26 @@
 
         .modal-body {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 0 1.5rem 1.25rem;
+            gap: 2vw;
+            padding: 0 2vw 2vh 2vw;
             overflow: hidden;
             flex: 1;
         }
 
-        /* Mobile: images scroll horizontally */
         .modal-images {
             display: flex;
-            flex-direction: row;
-            gap: 0.75rem;
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
+            flex-direction: column;
+            gap: 1.2vh;
             flex-shrink: 0;
+            width: 18vw;
+            overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
 
-        .modal-images::-webkit-scrollbar { display: none; }
+        .modal-images::-webkit-scrollbar {
+            display: none;
+        }
 
         .modal-images.show-scrollbar {
             scrollbar-width: thin;
@@ -221,7 +324,6 @@
         .modal-images.show-scrollbar::-webkit-scrollbar {
             display: block;
             width: 4px;
-            height: 4px;
         }
 
         .modal-images.show-scrollbar::-webkit-scrollbar-thumb {
@@ -229,11 +331,13 @@
             border-radius: 2px;
         }
 
-        .modal-images.hide-clones .modal-img-clone { display: none; }
+        .modal-images.hide-clones .modal-img-clone {
+            display: none;
+        }
 
         .modal-img-slot {
-            border-radius: 0.5rem;
-            min-width: 7.5rem;
+            border-radius: 0.5vw;
+            width: 100%;
             aspect-ratio: 4 / 3;
             flex-shrink: 0;
             overflow: hidden;
@@ -249,190 +353,247 @@
         .modal-text {
             flex: 1;
             overflow-y: auto;
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-            color: #000;
+            font-family: 'Hubballi', sans-serif;
+            font-size: 1.7vw;
+            line-height: 1.9vw;
+            color: black;
         }
 
-        .modal-text p + p { margin-top: 0.75rem; }
+        .modal-text p + p {
+            margin-top: 1.2vh;
+        }
 
-        /* ── Tablet (768px+) ── */
-        @media (min-width: 768px) {
-            .about-main { padding: 1.5rem 2rem 3rem; }
-
-            .about-section {
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 3rem;
+        /* ── Tablet (768px – 1024px) ── */
+        @media (max-width: 1024px) {
+            .about-heading {
+                font-size: 3.8vw;
+                top: 13vw;
             }
 
-            .about-left { flex: 1; }
-
-            .about-right {
-                flex-shrink: 0;
-                width: 38%;
-                max-width: 22rem;
+            .bio-text {
+                font-size: 1.7vw;
+                line-height: 2.6vw;
             }
 
+            .contact-heading {
+                font-size: 3.8vw;
+            }
+
+            .modal-title { font-size: 4vw; }
+            .modal-text { font-size: 2vw; line-height: 2.4vw; }
+        }
+
+        /* ── Mobile (<768px) ── */
+        @media (max-width: 767px) {
+            body {
+                overflow: auto;
+            }
+
+            .page {
+                position: static;
+                width: 100%;
+                min-height: 100vh;
+                padding: 0 20px 40px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* About heading */
+            .about-heading {
+                position: static;
+                font-size: 28px;
+                white-space: normal;
+                margin-bottom: 16px;
+            }
+
+            /* Profile photo — centered, below bio */
             .profile-photo-wrap {
+                position: static;
+                width: 200px;
+                height: 200px;
+                margin: 16px auto;
+            }
+
+            /* Hide decorative characters */
+            .char-container,
+            .char-star-container {
+                display: none;
+            }
+
+            /* Bio text */
+            .bio-text {
+                position: static;
+                width: 100%;
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 8px;
+            }
+
+            .more-link {
+                position: static;
+                font-size: 16px;
+                margin-bottom: 28px;
+            }
+
+            /* Contact section */
+            .contact-heading {
+                position: static;
+                font-size: 28px;
+                margin-bottom: 16px;
+            }
+
+            /* Buttons: 2-column grid */
+            .contact-btn {
+                position: static;
                 width: 100%;
                 height: auto;
-                aspect-ratio: 1;
-                margin: 0;
+                padding: 12px 16px;
+                border-radius: 12px;
+                gap: 12px;
             }
 
-            .about-heading { font-size: 2rem; }
-            .bio-text { font-size: 1.0625rem; }
+            .btn-icon {
+                width: 28px;
+                height: 28px;
+            }
 
-            .contact-heading { font-size: 2rem; }
-            .contact-buttons-grid { grid-template-columns: repeat(4, 1fr); }
-            .btn-icon { width: 2rem; height: 2rem; }
+            .btn-label { font-size: 16px; }
+            .btn-sub   { font-size: 12px; }
 
-            /* Modal: images scroll vertically on the left */
-            .modal-body { flex-direction: row; }
+            /* Grid wrapper for the 4 buttons */
+            .contact-buttons-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            /* Modal adjustments */
+            .modal-panel {
+                width: 92vw;
+                border-radius: 16px;
+            }
+
+            .modal-title { font-size: 24px; }
+
+            .modal-close {
+                width: 20px;
+                height: 20px;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
 
             .modal-images {
-                flex-direction: column;
-                width: 11rem;
-                overflow-x: hidden;
-                overflow-y: auto;
-                flex-shrink: 0;
-            }
-
-            .modal-img-slot { min-width: 0; }
-
-            .modal-title { font-size: 2rem; }
-            .modal-text { font-size: 1rem; }
-        }
-
-        /* ── Desktop (1024px+) ── */
-        @media (min-width: 1024px) {
-            .about-main { padding: 2rem 3rem 4rem; }
-
-            .about-right {
-                width: 42%;
-                max-width: 28rem;
-            }
-
-            .about-heading { font-size: 2.25rem; }
-            .bio-text { font-size: 1.125rem; }
-
-            /* Decorative characters around the photo */
-            .char-blob {
-                display: block;
-                position: absolute;
-                top: -2.5rem;
-                left: -2.5rem;
-                width: 5rem;
-                pointer-events: none;
-            }
-
-            .char-blob img {
+                flex-direction: row;
                 width: 100%;
-                transform: rotate(-17deg);
+                overflow-x: auto;
+                overflow-y: visible;
             }
 
-            .char-star {
-                display: block;
-                position: absolute;
-                bottom: -1.5rem;
-                right: -2.5rem;
-                width: 5rem;
-                pointer-events: none;
+            .modal-img-slot {
+                min-width: 120px;
             }
 
-            .char-star img {
-                width: 100%;
-                transform: rotate(-9deg);
+            .modal-text {
+                font-size: 15px;
+                line-height: 1.55;
             }
-
-            .contact-heading { font-size: 2.25rem; }
-
-            .modal-images { width: 14rem; }
-            .modal-title { font-size: 2.25rem; }
-            .modal-text { font-size: 1.0625rem; }
         }
     </style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="nav-brand">
-            <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
-            <a class="site-name" href="index.html">michelle jiang</a>
+    <!-- Nav -->
+    <div class="nav-row">
+        <a href="index.html"><img class="logo-img" src="assets/logo.svg" alt="logo"></a>
+        <a class="site-name" href="index.html">michelle jiang</a>
+    </div>
+    <nav>
+        <a href="about.html" class="active">about</a>
+        <a href="projects.html">projects</a>
+        <a href="experience.html">experience</a>
+    </nav>
+
+    <div class="page">
+
+        <!-- About -->
+        <p class="about-heading">a little about me</p>
+        <p class="bio-text">Hi! My name is Michelle and I am currently a sophomore at Carnegie Mellon University studying Statistics &amp; Machine Learning, with an additional major in Artificial Intelligence. My primary interests are in machine learning, physical AI, and AI safety.</p>
+        <a class="more-link" href="#" id="more-link">+ more!</a>
+
+        <!-- Profile photo -->
+        <div class="profile-photo-wrap">
+            <img src="assets/myBioPhoto.png" alt="Michelle Jiang">
         </div>
-        <nav>
-            <a href="about.html" class="active">about</a>
-            <a href="projects.html">projects</a>
-            <a href="experience.html">experience</a>
-        </nav>
-    </header>
 
-    <main class="about-main">
-
-        <section class="about-section">
-            <div class="about-left">
-                <h1 class="about-heading">a little about me</h1>
-                <p class="bio-text">Hi! My name is Michelle and I am currently a sophomore at Carnegie Mellon University studying Statistics &amp; Machine Learning, with an additional major in Artificial Intelligence. My primary interests are in machine learning, physical AI, and AI safety.</p>
-                <a class="more-link" href="#" id="more-link">+ more!</a>
-            </div>
-            <div class="about-right">
-                <div class="profile-photo-wrap">
-                    <img src="assets/myBioPhoto.png" alt="Michelle Jiang">
-                </div>
-                <div class="char-blob">
+        <!-- Fluffy character overlapping photo -->
+        <div class="char-container">
+            <div class="char-rotated">
+                <div class="char-clip">
                     <img src="assets/oneLittleBlob.svg" alt="">
                 </div>
-                <div class="char-star">
+            </div>
+        </div>
+
+        <!-- Star character bottom-right of photo -->
+        <div class="char-star-container">
+            <div class="char-star-rotated">
+                <div class="char-star-clip">
                     <img src="assets/oneLittleStar.svg" alt="">
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="contact-section">
-            <h2 class="contact-heading">contact me</h2>
-            <div class="contact-buttons-grid">
-                <a class="contact-btn btn-email" href="mailto:mzj@andrew.cmu.edu">
-                    <img class="btn-icon" src="assets/mailIcon.svg" alt="">
-                    <div class="btn-label-wrap">
-                        <span class="btn-label">email</span>
-                        <span class="btn-sub">mzj@andrew.cmu.edu</span>
-                    </div>
-                </a>
-                <a class="contact-btn btn-linkedin" href="https://www.linkedin.com/in/michelle-jiang-5ab5a0302/" target="_blank" rel="noopener">
-                    <img class="btn-icon" src="assets/linkedinIcon.svg" alt="">
-                    <div class="btn-label-wrap">
-                        <span class="btn-label">linkedin</span>
-                    </div>
-                </a>
-                <a class="contact-btn btn-github" href="https://github.com/michellezjiang" target="_blank" rel="noopener">
-                    <img class="btn-icon" src="assets/githubIcon.svg" alt="">
-                    <div class="btn-label-wrap">
-                        <span class="btn-label">github</span>
-                    </div>
-                </a>
-                <a class="contact-btn btn-resume" href="Michelle Jiang Resume (1).pdf" target="_blank" rel="noopener">
-                    <img class="btn-icon" src="assets/resumeIcon.svg" alt="">
-                    <div class="btn-label-wrap">
-                        <span class="btn-label">resume</span>
-                        <span class="btn-sub">pdf</span>
-                    </div>
-                </a>
-            </div>
-        </section>
+        <!-- Contact -->
+        <p class="contact-heading">contact me</p>
 
-    </main>
+        <div class="contact-buttons-grid">
+            <a class="contact-btn btn-email" href="mailto:mzj@andrew.cmu.edu">
+                <img class="btn-icon" src="assets/mailIcon.svg" alt="">
+                <div class="btn-label-wrap">
+                    <span class="btn-label">email</span>
+                    <span class="btn-sub">mzj@andrew.cmu.edu</span>
+                </div>
+            </a>
+
+            <a class="contact-btn btn-linkedin" href="https://www.linkedin.com/in/michelle-jiang-5ab5a0302/" target="_blank" rel="noopener">
+                <img class="btn-icon" src="assets/linkedinIcon.svg" alt="">
+                <div class="btn-label-wrap">
+                    <span class="btn-label">linkedin</span>
+                </div>
+            </a>
+
+            <a class="contact-btn btn-github" href="https://github.com/michellezjiang" target="_blank" rel="noopener">
+                <img class="btn-icon" src="assets/githubIcon.svg" alt="">
+                <div class="btn-label-wrap">
+                    <span class="btn-label">github</span>
+                </div>
+            </a>
+
+            <a class="contact-btn btn-resume" href="Michelle Jiang Resume (1).pdf" target="_blank" rel="noopener">
+                <img class="btn-icon" src="assets/resumeIcon.svg" alt="">
+                <div class="btn-label-wrap">
+                    <span class="btn-label">resume</span>
+                    <span class="btn-sub">pdf</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
 
     <!-- More modal -->
     <div class="modal-overlay" id="more-modal">
         <div class="modal-panel">
+
             <div class="modal-header">
                 <p class="modal-title">a little more...</p>
                 <button class="modal-close" id="modal-close" aria-label="Close">
                     <img src="assets/X.png" alt="close">
                 </button>
             </div>
+
             <div class="modal-body">
+                <!-- Image slots (blank for now) -->
                 <div class="modal-images">
                     <div class="modal-img-slot"><img src="aboutPhotos/IMG_3335.JPG" alt=""></div>
                     <div class="modal-img-slot"><img src="aboutPhotos/IMG_2489.jpg" alt=""></div>
@@ -442,6 +603,8 @@
                     <div class="modal-img-slot"><img src="aboutPhotos/IMG_1071.jpg" alt=""></div>
                     <div class="modal-img-slot"><img src="aboutPhotos/IMG_6518.jpg" alt=""></div>
                 </div>
+
+                <!-- Text -->
                 <div class="modal-text">
                     <p>When I need a break from school, I enjoy exploring my various hobbies with my friends! Recently, I&#8217;ve been really into trying new restaurants around my school. If you ever need food recommendations in the Pittsburgh area, check out my Yelp here.</p>
                     <p>In addition to food, I also enjoy playing tennis when the weather is nice. I actually played competitively from elementary school to high school! I have also been trying to get back into reading, which you can see on my Goodreads!</p>
@@ -449,6 +612,7 @@
                     <p>Overall, I just really enjoy rating things and giving my unsolicited opinions on the internet (as you can probably tell &#128513;)</p>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -468,15 +632,14 @@
 
         let scrollTimer = null;
         let paused = false;
-        let oneSetHeight = 0;
 
         function startAutoScroll() {
             clearInterval(scrollTimer);
             scrollTimer = setInterval(function() {
                 if (paused) return;
                 imgList.scrollTop += 1;
-                if (imgList.scrollTop >= oneSetHeight) {
-                    imgList.scrollTop -= oneSetHeight;
+                if (imgList.scrollTop >= imgList.scrollHeight / 2) {
+                    imgList.scrollTop -= imgList.scrollHeight / 2;
                 }
             }, 20);
         }
@@ -488,13 +651,12 @@
 
         imgList.addEventListener('mouseenter', function() {
             paused = true;
-            const normalizedTop = imgList.scrollTop >= oneSetHeight
-                ? imgList.scrollTop - oneSetHeight
-                : imgList.scrollTop;
+            // Normalize position into the original half before hiding clones
+            const halfH = imgList.scrollHeight / 2;
+            if (imgList.scrollTop >= halfH) {
+                imgList.scrollTop -= halfH;
+            }
             imgList.classList.add('hide-clones', 'show-scrollbar');
-            requestAnimationFrame(function() {
-                imgList.scrollTop = normalizedTop;
-            });
         });
 
         imgList.addEventListener('mouseleave', function() {
@@ -506,12 +668,7 @@
             e.preventDefault();
             modal.classList.add('active');
             imgList.scrollTop = 0;
-            requestAnimationFrame(function() {
-                const containerTop = imgList.getBoundingClientRect().top;
-                const firstClone = imgList.querySelector('.modal-img-clone');
-                oneSetHeight = firstClone.getBoundingClientRect().top - containerTop;
-                startAutoScroll();
-            });
+            startAutoScroll();
         });
 
         closeBtn.addEventListener('click', function() {
