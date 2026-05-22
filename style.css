@@ -46,9 +46,7 @@ body {
 }
 
 nav {
-    display: flex;
-    gap: 20px;
-    padding: 8px 20px 16px;
+    display: none;
 }
 
 nav a {
@@ -68,13 +66,69 @@ nav a.active {
     text-underline-offset: 6px;
 }
 
+/* ── Hamburger ── */
+.hamburger {
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px 0 6px 4px;
+}
+
+.hamburger-icon span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #000;
+    border-radius: 1px;
+}
+
+.hamburger-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 2px);
+    background: #fff;
+    flex-direction: column;
+    padding: 8px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    z-index: 20;
+}
+
+.hamburger-dropdown a {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 24px;
+    white-space: nowrap;
+}
+
+.hamburger-dropdown a:hover { opacity: 0.6; }
+
+.hamburger-dropdown a.active {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+}
+
+.hamburger:hover .hamburger-dropdown { display: flex; }
+
 /* Tablet (768px+) */
 @media (min-width: 768px) {
     .nav-row { padding: 14px 16px 0; }
     .logo-img { width: 40px; height: 30px; }
     .site-name { font-size: 20px; }
-    nav { gap: 20px; padding: 8px 16px 20px; }
-    nav a { font-size: 20px; }
+    .hamburger-dropdown a { font-size: 18px; }
 }
 
 /* Desktop (1024px+) */
@@ -86,6 +140,8 @@ nav a.active {
         overflow: visible;
         padding: 0;
     }
+
+    .hamburger { display: none; }
 
     .logo-img {
         position: absolute;
@@ -105,6 +161,7 @@ nav a.active {
     }
 
     nav {
+        display: flex;
         position: absolute;
         right: 1.32vw;
         top: 2.5vw;
