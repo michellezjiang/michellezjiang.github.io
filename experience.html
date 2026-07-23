@@ -43,6 +43,16 @@
         .timeline {
             display: flex;
             flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Each pair holds one left + one right entry, plus its own
+           copy of the decorative spine/characters (desktop only) —
+           this repeats per pair so decorations scale with any
+           number of entries instead of stretching across all of them */
+        .timeline-pair {
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
         }
 
@@ -152,6 +162,10 @@
 
             /* Timeline alternating layout */
             .timeline {
+                gap: 5vw;
+            }
+
+            .timeline-pair {
                 gap: 3vw;
                 position: relative;
                 z-index: 2;
@@ -177,7 +191,8 @@
             .timeline-entry.left::after {
                 content: '';
                 position: absolute;
-                top: 4.5vw;
+                top: 50%;
+                transform: translateY(-50%);
                 right: -16vw;
                 width: 16vw;
                 height: 1px;
@@ -188,7 +203,8 @@
             .timeline-entry.right::before {
                 content: '';
                 position: absolute;
-                top: 4.24vw;
+                top: 50%;
+                transform: translateY(-50%);
                 left: -16vw;
                 width: 16vw;
                 height: 1px;
@@ -240,47 +256,102 @@
 
         <div class="experience-area">
 
-            <!-- Decorative vertical squiggle spine (desktop only) -->
-            <div class="timeline-spine">
-                <img src="assets/lineArt-home.svg" alt="">
-            </div>
-
-            <div class="char-fluffy">
-                <img src="assets/oneLittleBlob.svg" alt="">
-            </div>
-
-            <div class="char-star">
-                <img src="assets/oneLittleStar.svg" alt="">
-            </div>
-
             <!-- =====================================================
-                 TIMELINE ENTRIES
+                 TIMELINE
+                 Entries are grouped in pairs of two (one left, one
+                 right). Each pair carries its own spine/character
+                 decoration (desktop only) so the artwork always
+                 scales to however many pairs exist instead of being
+                 stretched across the whole timeline.
+
                  To add a new entry:
-                   • Copy a .timeline-entry block
-                   • Toggle class between "left" and "right"
-                   • Update role, org, date, and bullet points
+                   • If the last pair only has one entry, add your
+                     entry to it (toggle class "left"/"right")
+                   • Otherwise, copy a whole .timeline-pair block
                  ===================================================== -->
             <div class="timeline">
 
-                <div class="timeline-entry left">
-                    <div class="entry-card">
-                        <p class="entry-role">Enterprise Technology Intern</p>
-                        <p class="entry-org">@ State Farm</p>
-                        <p class="entry-date">May 2026 - Aug 2026</p>
-                        <ul class="entry-bullets">
-                            <li>data engineering and aggregation</li>
-                        </ul>
+                <div class="timeline-pair">
+                    <!-- Decorative vertical squiggle spine (desktop only) -->
+                    <div class="timeline-spine">
+                        <img src="assets/lineArt-home.svg" alt="">
+                    </div>
+
+                    <div class="char-fluffy">
+                        <img src="assets/oneLittleBlob.svg" alt="">
+                    </div>
+
+                    <div class="char-star">
+                        <img src="assets/oneLittleStar.svg" alt="">
+                    </div>
+
+                    <div class="timeline-entry left">
+                        <div class="entry-card">
+                            <p class="entry-role">Enterprise Technology Engineering Intern</p>
+                            <p class="entry-org">@ State Farm</p>
+                            <p class="entry-date">June 2026 - Aug. 2026</p>
+                            <ul class="entry-bullets">
+                                <li>Using SQL & Power Platform to automate data workflows and build dashboards for stakeholders</li>
+                                <li>Exploring AWS Services (Bedrock, DynamoDB) to build new apps addressing team problems</li>
+                                <li>Identifying opportunities to leverage AI tools to enhance team efficiency</li>
+                                <li>Collaborating with team members to gain experience working in a professional environment</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-entry right">
+                        <div class="entry-card">
+                            <p class="entry-role">Effective Coding with AI (15-113) Teaching Assistant</p>
+                            <p class="entry-org">@ CMU School of Computer Science</p>
+                            <p class="entry-date">Jan. 2026 - Present</p>
+                            <ul class="entry-bullets">
+                                <li>Spearheading new course designed to teach students to integrate AI into their project workflow to build cool apps</li>
+                                <li>Experimenting with different techniques with students such as RAG, multi-agent workflows, and the newest technology to teach useful and applicable skills for industry</li>
+                                <li>Designing assignments, grading weekly projects, hosting office hours, and teaching lectures on interesting topics</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="timeline-entry right">
-                    <div class="entry-card">
-                        <p class="entry-role">Effective Coding with AI TA</p>
-                        <p class="entry-org">@ CMU School of Computer Science</p>
-                        <p class="entry-date">January 2026 - present</p>
-                        <ul class="entry-bullets">
-                            <li>ta duties ts</li>
-                        </ul>
+                <div class="timeline-pair">
+                    <!-- Decorative vertical squiggle spine (desktop only) -->
+                    <div class="timeline-spine">
+                        <img src="assets/lineArt-home.svg" alt="">
+                    </div>
+
+                    <div class="char-fluffy">
+                        <img src="assets/oneLittleBlob.svg" alt="">
+                    </div>
+
+                    <div class="char-star">
+                        <img src="assets/oneLittleStar.svg" alt="">
+                    </div>
+
+                    <div class="timeline-entry left">
+                        <div class="entry-card">
+                            <p class="entry-role">Undergraduate Statistics Ambassador</p>
+                            <p class="entry-org">@ CMU Statistics and Data Science Department</p>
+                            <p class="entry-date">Aug. 2025 - Present</p>
+                            <ul class="entry-bullets">
+                                <li>Acting as liaison between 300+ undergraduate Statistics students and the Stat faculty/advisors</li>
+                                <li>Provide peer guidance to students about coursework, internships, research, and more</li>
+                                <li>Plan/host bimonthly events (cocurricular & social) to help students and strengthen community</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-entry right">
+                        <div class="entry-card">
+                            <p class="entry-role">Fundamentals of Programming and CS (15-112) Teaching Assistant</p>
+                            <p class="entry-org">@ CMU School of Computer Science</p>
+                            <p class="entry-date">June 2025 - Dec. 2025</p>
+                            <ul class="entry-bullets">
+                                <li>Served on staff of intro Python computer science to teach 300+ students fundamental programming skills and computer science topics</li>
+                                <li>Led weekly recitations of ~25 undergraduate/graduate students to consolidate lecture material and work through problems</li>
+                                <li>Increased student engagement through weekly office hours and quiz/exam prep sessions</li>
+                                <li>Helped organize a hackathon for 100+ students to show the skills they learned through the course</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
