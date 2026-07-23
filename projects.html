@@ -115,7 +115,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title-wrap { display: flex; align-items: center; gap: 0.5rem; }
+        .modal-title-wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
 
         .modal-title {
             font-family: var(--font-display);
@@ -129,7 +129,6 @@
             font-family: var(--font-body);
             font-size: 1rem;
             color: #555;
-            margin-top: 0.25rem;
         }
 
         .modal-close {
@@ -193,6 +192,21 @@
             font-size: 0.9rem;
             white-space: nowrap;
         }
+
+        .modal-repo-link {
+            display: none;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #000;
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .modal-repo-link.active { display: inline-block; }
+
+        .modal-repo-link:hover { opacity: 0.6; }
 
         /* ── Tablet (768px+) ── */
         @media (min-width: 768px) {
@@ -336,6 +350,7 @@
                 <div class="modal-title-wrap">
                     <p class="modal-title" id="modal-title"></p>
                     <img class="modal-title-star" src="assets/oneLittleStar.svg" alt="">
+                    <p class="modal-event" id="modal-event"></p>
                 </div>
                 <button class="modal-close" id="modal-close" aria-label="Close">
                     <img src="assets/X.png" alt="close">
@@ -343,7 +358,7 @@
             </div>
 
             <div class="modal-body">
-                <p class="modal-event" id="modal-event"></p>
+                <a class="modal-repo-link" id="modal-repo-link" href="#" target="_blank" rel="noopener">github repo</a>
 
                 <video class="modal-video" id="modal-video" controls playsinline></video>
 
@@ -374,6 +389,7 @@
             timeline: {
                 title: '*-timeline',
                 event: 'TartanHacks Hackathon',
+                repo: 'https://github.com/evelynnwu/TIMELINE',
                 description: [
                     'Designed an AI-free artist portfolio and social platform for creators to share their work, connect with other artists, and build a community that values human creativity over AI-generated content',
                     'Implemented features for AI detection, photo/text uploading, thread system, and user engagement'
@@ -388,6 +404,7 @@
         const modalVideo   = document.getElementById('modal-video');
         const modalDesc    = document.getElementById('modal-description');
         const modalTags    = document.getElementById('modal-tags');
+        const modalRepoLink = document.getElementById('modal-repo-link');
         const closeBtn      = document.getElementById('modal-close');
 
         function openProjectModal(key) {
@@ -420,6 +437,14 @@
                 span.textContent = tag;
                 modalTags.appendChild(span);
             });
+
+            if (project.repo) {
+                modalRepoLink.href = project.repo;
+                modalRepoLink.classList.add('active');
+            } else {
+                modalRepoLink.removeAttribute('href');
+                modalRepoLink.classList.remove('active');
+            }
 
             modal.classList.add('active');
         }
