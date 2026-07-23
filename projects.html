@@ -54,9 +54,144 @@
         }
 
         .project-card {
-            background: var(--surface-2);
+            background: #fff;
             border-radius: 0.625rem;
             aspect-ratio: 445 / 230;
+            box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font: inherit;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .project-card:hover,
+        .project-card:focus-visible {
+            transform: translateY(-0.2rem);
+            box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.12);
+            outline: none;
+        }
+
+        .project-card-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: #000;
+        }
+
+        /* ── Project modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-panel {
+            background: #fff;
+            border-radius: 1.5rem;
+            width: min(40rem, 100%);
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.5rem 1.5rem 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .modal-title-wrap { display: flex; align-items: center; gap: 0.5rem; }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .modal-title-star { width: 1.75rem; flex-shrink: 0; transform: rotate(9deg); }
+
+        .modal-event {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+
+        .modal-close {
+            width: 1.25rem;
+            height: 1.25rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .modal-close img { width: 100%; height: 100%; object-fit: contain; }
+
+        .modal-body {
+            padding: 0.5rem 1.5rem 1.75rem;
+            overflow-y: auto;
+        }
+
+        .modal-video {
+            display: none;
+            width: 100%;
+            border-radius: 0.75rem;
+            margin-top: 0.75rem;
+            background: #000;
+        }
+
+        .modal-video.active { display: block; }
+
+        .modal-section-heading {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            color: #000;
+            margin-top: 1.25rem;
+        }
+
+        .modal-section-heading:first-child { margin-top: 0; }
+
+        .modal-description-list {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #000;
+            margin: 0.5rem 0 0 1.25rem;
+        }
+
+        .modal-description-list li + li { margin-top: 0.3rem; }
+
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+
+        .modal-tag {
+            background: var(--surface-2);
+            border-radius: 0.5rem;
+            padding: 0.35rem 0.75rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         /* ── Tablet (768px+) ── */
@@ -97,6 +232,7 @@
 
             .projects-grid { gap: 4vw 11.5vw; }
             .project-card { border-radius: 0.7vw; }
+            .project-card-title { font-size: 2.5vw; }
 
             .char-fluffy {
                 display: flex;
@@ -171,18 +307,143 @@
 
                 <!-- =============================================
                      PROJECT GRID
-                     To add a new project, copy a .project-card
-                     block below and paste it inside this div.
+                     To add a new project:
+                       • Add a button.project-card with a unique
+                         data-project value
+                       • Add a matching entry to the PROJECTS object
+                         in the script below
                      ============================================= -->
                 <div class="projects-grid">
 
-                    <div class="project-card">
-                        <!-- Project content goes here -->
-                    </div>
+                    <button type="button" class="project-card" data-project="onesource">
+                        <p class="project-card-title">OneSource</p>
+                    </button>
+
+                    <button type="button" class="project-card" data-project="timeline">
+                        <p class="project-card-title">*-timeline</p>
+                    </button>
 
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Project detail modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-panel">
+
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <p class="modal-title" id="modal-title"></p>
+                    <img class="modal-title-star" src="assets/oneLittleStar.svg" alt="">
+                </div>
+                <button class="modal-close" id="modal-close" aria-label="Close">
+                    <img src="assets/X.png" alt="close">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p class="modal-event" id="modal-event"></p>
+
+                <video class="modal-video" id="modal-video" controls playsinline></video>
+
+                <p class="modal-section-heading">description</p>
+                <ul class="modal-description-list" id="modal-description"></ul>
+
+                <p class="modal-section-heading">tools/skills</p>
+                <div class="modal-tags" id="modal-tags"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const PROJECTS = {
+            onesource: {
+                title: 'OneSource',
+                event: 'State Farm HackDay',
+                video: 'assets/oneSource.mp4',
+                description: [
+                    'Identified bottleneck in team workflow process in maintaining and updating requirements',
+                    'Fine-tuned Nova Pro model on AWS Bedrock to automate requirement and story generation',
+                    'Created a centralized platform to connect different requirement sources to streamline workflow',
+                    'Used Claude Code to plan, test, and build the entire project in under 10 hours'
+                ],
+                tags: ['AWS Bedrock', 'S3', 'Lambda', 'DynamoDB', 'Claude Code', 'Application Design']
+            },
+            timeline: {
+                title: '*-timeline',
+                event: 'TartanHacks Hackathon',
+                description: [
+                    'Designed an AI-free artist portfolio and social platform for creators to share their work, connect with other artists, and build a community that values human creativity over AI-generated content',
+                    'Implemented features for AI detection, photo/text uploading, thread system, and user engagement'
+                ],
+                tags: ['Claude Code', 'Application Design', 'SQL Database', 'Figma']
+            }
+        };
+
+        const modal       = document.getElementById('project-modal');
+        const modalTitle   = document.getElementById('modal-title');
+        const modalEvent   = document.getElementById('modal-event');
+        const modalVideo   = document.getElementById('modal-video');
+        const modalDesc    = document.getElementById('modal-description');
+        const modalTags    = document.getElementById('modal-tags');
+        const closeBtn      = document.getElementById('modal-close');
+
+        function openProjectModal(key) {
+            const project = PROJECTS[key];
+            if (!project) return;
+
+            modalTitle.textContent = project.title;
+            modalEvent.textContent = project.event;
+
+            if (project.video) {
+                modalVideo.src = project.video;
+                modalVideo.classList.add('active');
+            } else {
+                modalVideo.removeAttribute('src');
+                modalVideo.load();
+                modalVideo.classList.remove('active');
+            }
+
+            modalDesc.innerHTML = '';
+            project.description.forEach(function(point) {
+                const li = document.createElement('li');
+                li.textContent = point;
+                modalDesc.appendChild(li);
+            });
+
+            modalTags.innerHTML = '';
+            project.tags.forEach(function(tag) {
+                const span = document.createElement('span');
+                span.className = 'modal-tag';
+                span.textContent = tag;
+                modalTags.appendChild(span);
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeProjectModal() {
+            modal.classList.remove('active');
+            modalVideo.pause();
+        }
+
+        document.querySelectorAll('.project-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                openProjectModal(card.dataset.project);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeProjectModal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeProjectModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+    </script>
 </body>
 </html>
